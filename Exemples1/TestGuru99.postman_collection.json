@@ -1,0 +1,697 @@
+{
+	"info": {
+		"_postman_id": "08de6eb0-2d80-4bf2-b5a0-b6c4662ae1ff",
+		"name": "TestGuru99",
+		"description": "TestGuru99",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Base",
+			"item": [
+				{
+					"name": "GET Postman 1 Users",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "9584ea33-7b36-40b7-b420-41017588c6b0",
+								"exec": [
+									"//****1. Make the call and capture the response in a variable",
+									"",
+									"console.log(pm.response.code);",
+									"console.log(pm.response.status);",
+									"console.log(pm.response.headers);",
+									"console.log(pm.response.text());",
+									"",
+									"// 2. CHECK THE RESPONSE STATUS",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"    pm.expect(pm.response.code).to.eql(200);",
+									"    pm.response.to.have.status(\"OK\");",
+									"});",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.expect(pm.response.code).to.eql(200);",
+									"});",
+									"",
+									"pm.test(\"Content-Type is present\", function () {",
+									"    pm.response.to.have.header(\"Content-Type\");",
+									"});",
+									"",
+									"// 3.1 CHECK THE RESPONSE BODY - KEY",
+									"pm.test(\"Body matches string\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"username\");",
+									"});",
+									"",
+									"// 3.2 CHECK THE RESPONSE BODY - VALUE",
+									"pm.test(\"Name 1 ID\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[0].name).to.eql(\"Leanne Graham\");",
+									"});",
+									"",
+									"",
+									"pm.test(\"Body matches string\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"Bret\");",
+									"});",
+									"",
+									"// Response body: Contains a string",
+									"pm.test(\"Check if pattern is in target string\",function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[0].name).to.have.string('Leanne');",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://jsonplaceholder.typicode.com/users",
+							"protocol": "https",
+							"host": [
+								"jsonplaceholder",
+								"typicode",
+								"com"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET Postman 2 Gender",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "0f10b622-067f-46db-a8e8-4183a039cf1e",
+								"exec": [
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200]);",
+									"});",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.expect(pm.response.code).to.eql(200);",
+									"});",
+									"",
+									"pm.test(\"Your test name\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.results[0].name.title).to.eql(\"Mr\");",
+									"});",
+									"",
+									"pm.test(\"Your test name\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property(\"results\");",
+									"    pm.expect(jsonData.results).to.have.property(\"0\");",
+									"    pm.expect(jsonData.results[0]).to.have.property(\"gender\");",
+									"    pm.expect(jsonData.results[0]).to.have.property(\"name\");",
+									"    pm.expect(jsonData.results[0].name).to.have.property(\"title\");",
+									"    pm.expect(jsonData.results[0].name).to.have.property(\"first\");",
+									"});",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://randomuser.me/api?gender=male&nat=us",
+							"protocol": "https",
+							"host": [
+								"randomuser",
+								"me"
+							],
+							"path": [
+								"api"
+							],
+							"query": [
+								{
+									"key": "gender",
+									"value": "male"
+								},
+								{
+									"key": "nat",
+									"value": "us"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET Postman 3 foo bar",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "737dc66a-c7a8-4de9-9ca6-630a47e84466",
+								"exec": [
+									"",
+									"pm.test(\"Body is correct\", function () {",
+									"    pm.expect(pm.cookies.toObject()).to.have.property(\"foo1\",\"bar1\");",
+									"});",
+									"",
+									"pm.test(\"Body is correct\", function () {",
+									"    pm.response.to.have.jsonBody(\"cookies.foo1\",\"bar1\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://postman-echo.com/cookies/set?foo1=bar1&foo2=bar2",
+							"protocol": "https",
+							"host": [
+								"postman-echo",
+								"com"
+							],
+							"path": [
+								"cookies",
+								"set"
+							],
+							"query": [
+								{
+									"key": "foo1",
+									"value": "bar1"
+								},
+								{
+									"key": "foo2",
+									"value": "bar2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET Postman 4 Dif Levels",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "4dc4916b-01f7-40c0-af6c-1399cbaac6a0",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.expect(pm.response.code).to.eql(200);",
+									"});",
+									"",
+									"pm.test(\"Content-Type is present\", function () {",
+									"    pm.response.to.have.header(\"Content-Type\");",
+									"});",
+									"",
+									"pm.test(\"To have key\", function () {",
+									"    var jsonData = pm.response.json()[0];",
+									"    pm.expect(jsonData).to.be.an(\"object\").that.is.not.empty;",
+									"    //pm.expect(jsonData.length).to.eql(6);",
+									"    pm.expect(jsonData).to.have.property(\"name\");",
+									"    pm.expect(jsonData.name).to.eql(\"Leanne Graham\");",
+									"    ",
+									"    pm.expect(jsonData.address).to.be.an(\"object\").that.is.not.empty;",
+									"    pm.expect(jsonData.address.street).to.eql(\"Kulas Light\");",
+									"    ",
+									"    pm.expect(jsonData.address.geo).to.be.an(\"object\").that.is.not.empty;",
+									"    pm.expect(jsonData.address.geo.lng).to.eql(\"81.1496\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://jsonplaceholder.typicode.com/users",
+							"protocol": "https",
+							"host": [
+								"jsonplaceholder",
+								"typicode",
+								"com"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET Postman 5 Parametres",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/users",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET Postman 6 Code-Status erreur",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "33e98eff-76e4-4747-a2bb-7658a3fc76d4",
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {",
+									"    console.log(pm.response.code);",
+									"    console.log(pm.response.status);",
+									"    pm.response.to.have.status(404);",
+									"    pm.expect(pm.response.code).to.eql(404);",
+									"    pm.response.to.have.status(\"Not Found\");",
+									"});",
+									"",
+									"pm.test(\"Body is correct\", function () {",
+									"    pm.response.to.have.body(\"{}\");",
+									"    //pm.response.to.have.jsonBody(\"{}\");",
+									"    //pm.expect(jsonResponse.codeError).to.be.null;",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://jsonplaceholder.typicode.com/users1",
+							"protocol": "https",
+							"host": [
+								"jsonplaceholder",
+								"typicode",
+								"com"
+							],
+							"path": [
+								"users1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST Postman 1 Add Users",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n  {\r\n    \"id\": 1,\r\n    \"name\": \"Leanne Graham\",\r\n    \"username\": \"Bret\",\r\n    \"email\": \"Sincere@april.biz\",\r\n    \"address\": {\r\n      \"street\": \"Kulas Light\",\r\n      \"suite\": \"Apt. 556\",\r\n      \"city\": \"Gwenborough\",\r\n      \"zipcode\": \"92998-3874\",\r\n      \"geo\": {\r\n        \"lat\": \"-37.3159\",\r\n        \"lng\": \"81.1496\"\r\n      }\r\n    },\r\n    \"phone\": \"1-770-736-8031 x56442\",\r\n    \"website\": \"hildegard.org\",\r\n    \"company\": {\r\n      \"name\": \"Romaguera-Crona\",\r\n      \"catchPhrase\": \"Multi-layered client-server neural-net\",\r\n      \"bs\": \"harness real-time e-markets\"\r\n    }\r\n  }\r\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://jsonplaceholder.typicode.com/users",
+							"protocol": "https",
+							"host": [
+								"jsonplaceholder",
+								"typicode",
+								"com"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Request",
+			"item": [
+				{
+					"name": "GET Github 1 Events_",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "dda6447e-2548-4e3f-81bb-cd894f2290db",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Your test name\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData[0].public).to.eql(true);",
+									"});",
+									"",
+									"",
+									"/* pm.test(\"Your test name\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    console.log(jsonData[0]);",
+									"    pm.expect(jsonData[0]).to.have.lengthOf(7);",
+									"});*/",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://api.github.com/events",
+							"protocol": "http",
+							"host": [
+								"api",
+								"github",
+								"com"
+							],
+							"path": [
+								"events"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET Github 2 Keys_",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "5e4f06e8-870e-43d7-8386-3fdf62624310",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.expect(pm.response.code).to.eql(200);",
+									"});",
+									"",
+									"pm.test(\"Content-Type is present\", function () {",
+									"    pm.response.to.have.header(\"Content-Type\");",
+									"});",
+									"",
+									"",
+									"pm.test(\"Body matches string\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"current_user_url\");",
+									"});",
+									"",
+									"pm.test(\"Body matches string\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.contain.keys(\"current_user_url\",\"emails_url\",\"events_url\");",
+									"    ",
+									"    //pm.expect(jsonData.length).to.eql(30);",
+									"    //pm.expect(jsonData).to.have.lengthOf(30);",
+									"   ",
+									"    ",
+									"    var array = pm.globals.get(\"array_keys\");",
+									"    pm.expect(jsonData).to.contain.keys(array);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "0ca817aa-6158-4cc5-aa8a-8fe3543e57d5",
+								"exec": [
+									"var array = [\"emails_url\",\"emojis_url\",\"organization_url\",\"user_url\",\"user_search_url\"];",
+									"pm.globals.unset(\"array_keys\");",
+									"pm.globals.set(\"array_keys\",array);",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://api.github.com",
+							"protocol": "http",
+							"host": [
+								"api",
+								"github",
+								"com"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET Github 3 Keys_Values_",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "5b3fecd6-e7b0-46f4-864c-5b1160a876a0",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.expect(pm.response.code).to.eql(200);",
+									"});",
+									"",
+									"pm.test(\"Content-Type is present\", function () {",
+									"    pm.response.to.have.header(\"Content-Type\");",
+									"});",
+									"",
+									"pm.test(\"Body matches string\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"name\");",
+									"});",
+									"",
+									"pm.test(\"Body matches string\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"Bulkan Evcimen\");",
+									"});",
+									"",
+									"pm.test(\"Body matches string\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"login\",\"bulkan\");",
+									"    pm.expect(pm.response.text()).to.include(\"name\",\"Bulkan Evcimen\");",
+									"    pm.expect(pm.response.text()).to.include(\"login\",\"bulkan\",\"name\",\"Bulkan Evcimen\");",
+									"});",
+									"",
+									"",
+									"pm.test(\"To eql value\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property(\"name\");",
+									"    pm.expect(jsonData.name).to.eql(\"Bulkan Evcimen\");",
+									"});",
+									"",
+									"",
+									"pm.test(\"Body matches string\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.contain.keys(\"login\",\"name\",\"updated_at\");",
+									"    //pm.expect(jsonData).to.contain.values(\"bulkan\",\"Bulkan Evcimen\",\"2019-09-26T02:28:23Z\");",
+									"    ",
+									"    var array = pm.globals.get(\"array_keys\");",
+									"    pm.expect(jsonData).to.contain.keys(array);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "b4b7e555-97a4-41e5-bf29-6cd1a3a3e92e",
+								"exec": [
+									"var array = [\"login\",\"name\",\"updated_at\"];",
+									"pm.globals.unset(\"array_keys\");",
+									"pm.globals.set(\"array_keys\",array);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://api.github.com/users/bulkan",
+							"protocol": "http",
+							"host": [
+								"api",
+								"github",
+								"com"
+							],
+							"path": [
+								"users",
+								"bulkan"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	]
+}
